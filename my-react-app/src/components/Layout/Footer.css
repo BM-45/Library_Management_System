@@ -1,0 +1,46 @@
+/* Footer.css */
+.footer {
+  background-color: #0056b3;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-section {
+  margin-bottom: 10px;
+}
+
+.logo {
+  width: 50px; /* Adjust size as needed */
+}
+
+.tagline h2 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  color: white;
+}
+
+.links, .additional-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.links a, .additional-links a {
+  margin: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.location, .copyright {
+  margin-top: 10px;
+}

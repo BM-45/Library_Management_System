@@ -1,0 +1,36 @@
+/* SearchBar.css */
+.search-bar-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tabs button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-form {
+  display: flex;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px;
+}

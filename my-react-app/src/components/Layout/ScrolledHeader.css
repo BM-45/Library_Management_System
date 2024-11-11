@@ -1,0 +1,18 @@
+.scrolled-header {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  /*
+  .scrolled-header nav {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .scrolled-header a {
+    color: #333;
+    text-decoration: none;
+  }
+    */

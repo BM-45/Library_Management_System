@@ -1,0 +1,46 @@
+.home-page {
+    padding-top: 200px; /* Adjust this value to match your header height */
+    
+  }
+
+
+  .book-search {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  form {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .book-item {
+    text-align: center;
+  }
+  
+  .book-item img {
+    max-width: 100%;
+    height: auto;
+  }
