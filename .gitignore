@@ -27,3 +27,4 @@
 
 #Backend Files.
 /server/myenv
+__pycache__/

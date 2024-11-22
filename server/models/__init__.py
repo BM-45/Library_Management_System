@@ -1,8 +1,6 @@
 # models/__init__.py
 
-from .book import db
+# models/__init__.py
+from flask_sqlalchemy import SQLAlchemy
 
-def init_db(app):
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
+db = SQLAlchemy()

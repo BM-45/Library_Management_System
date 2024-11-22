@@ -5,3 +5,4 @@ flask-mysqldb
 flask-sqlalchemy
 pymysql
 python-dotenv
+flask-jwt-extended

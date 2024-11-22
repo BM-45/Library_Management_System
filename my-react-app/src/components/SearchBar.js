@@ -1,20 +1,21 @@
 // SearchBar.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SearchBar.css';
 
-function SearchBar({ onSearch }) {
+function SearchBar() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('books');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(query, category);
+    navigate(`/search?query=${encodeURIComponent(query)}&category=${category}`);
   };
 
   return (
     <div className="search-bar-container">
       <div className="tabs">
-        <button onClick={() => setCategory('search')}>Search</button>
         <button onClick={() => setCategory('books')}>Books</button>
         <button onClick={() => setCategory('journalTitles')}>Journal Titles</button>
         <button onClick={() => setCategory('databases')}>Databases</button>

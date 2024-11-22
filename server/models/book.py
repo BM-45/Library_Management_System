@@ -1,7 +1,8 @@
 # models/book.py
 from flask_sqlalchemy import SQLAlchemy
+from models import db
 
-db = SQLAlchemy()
+
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,3 +14,13 @@ class Book(db.Model):
 
     def __repr__(self):
         return f'<Book {self.title}>'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'author': self.author,
+            'isbn': self.isbn,
+            'image_url': self.image_url,
+            'text_viewer': self.text_viewer
+        }

@@ -1,15 +1,31 @@
 //import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import SearchResults from './components/SearchResults';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminDashboard from './pages/AdminDashboard';
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  // You should also check if the user is an admin here
+  // This would require storing user info in localStorage or fetching it from the server
+  return token ? children : <Navigate to="/login" />;
+}
 
 function App() {
   return (
     <Router>
     <div>
+
       
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchResults />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         { /* <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
