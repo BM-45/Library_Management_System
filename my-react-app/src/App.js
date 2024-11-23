@@ -6,6 +6,7 @@ import SearchResults from './components/SearchResults';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AdminDashboard from './pages/AdminDashboard';
+import AddBook from './components/AddBook';
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -26,8 +27,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-        { /* <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/addbook" element={<AddBook />} />
+        {/*<Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/profile" element={<ProfilePage />} />
          Add other routes as needed */}

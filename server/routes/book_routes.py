@@ -1,11 +1,13 @@
 # routes/book_routes.py
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from models.book import Book
 from models.user import User
 from models import db
 from sqlalchemy import or_
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from functools import wraps
+from werkzeug.utils import secure_filename
+import os
 
 book_bp = Blueprint('book_bp', __name__)
 
@@ -25,20 +27,52 @@ def get_books():
     books = Book.query.all()
     return jsonify([book.to_dict() for book in books])
 
+
+
 @book_bp.route('/books', methods=['POST'])
 @admin_required
 def add_book():
-    data = request.json
-    new_book = Book(
-        title=data['title'],
-        author=data['author'],
-        isbn=data['isbn'],
-        image_url=data.get('image_url'),
-        text_viewer=data.get('text_viewer')
-    )
-    db.session.add(new_book)
-    db.session.commit()
-    return jsonify({'message': 'Book added successfully', 'book': new_book.to_dict()}), 201
+    # Check if the post request has the file part
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file provided'}), 400
+    
+    file = request.files['image']
+    
+    # If the user does not select a file, the browser submits an empty file without a filename
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
+        
+        # Get other book data from form data
+        title = request.form.get('title')
+        author = request.form.get('author')
+        isbn = request.form.get('isbn')
+        text_viewer = request.form.get('text_viewer')
+        
+        # Create new book object
+        new_book = Book(
+            title=title,
+            author=author,
+            isbn=isbn,
+            image_url=f"/images/{filename}",  # Store the relative path
+            text_viewer=text_viewer
+        )
+        
+        db.session.add(new_book)
+        db.session.commit()
+        
+        return jsonify({'message': 'Book added successfully', 'book': new_book.to_dict()}), 201
+    
+    return jsonify({'error': 'Invalid file type'}), 400
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @book_bp.route('/books/<int:book_id>', methods=['PUT'])
 @admin_required

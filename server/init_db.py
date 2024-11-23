@@ -1,11 +1,15 @@
 # init_db.py
 from models.book import db, Book
 from app import create_app
+from sqlalchemy_utils import create_database, database_exists
 
 def init_db():
     app = create_app()
     with app.app_context():
-        db.create_all()
+        db_url = app.config['SQLALCHEMY_DATABASE_URI']
+        if not database_exists(db_url):
+            create_database(db_url)
+            db.create_all()
 
         # Check if the database is empty
         if Book.query.count() == 0:

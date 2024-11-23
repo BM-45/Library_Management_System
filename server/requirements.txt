@@ -2,7 +2,9 @@ mysql-connector-python
 flask
 flask-cors
 flask-mysqldb
-flask-sqlalchemy
+Flask-SQLAlchemy
+sqlalchemy-utils
 pymysql
 python-dotenv
 flask-jwt-extended
+werkzeug

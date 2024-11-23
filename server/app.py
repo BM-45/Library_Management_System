@@ -7,18 +7,25 @@ from models.book import db
 from models.user import User
 from routes.book_routes import book_bp
 from routes.user_routes import user_bp
+from sqlalchemy_utils import create_database, database_exists
+import os
 
 def create_app():
     app = Flask(__name__)
     CORS(app)  # Enable CORS for all routes
     app.config.from_object(Config)
+    app.config['UPLOAD_FOLDER'] = 'uploads'
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
     db.init_app(app)
     JWTManager(app)
 
     with app.app_context():
+        db_url = app.config['SQLALCHEMY_DATABASE_URI']
+        if not database_exists(db_url):
+            create_database(db_url)
         db.create_all()
-        init_db()  # Call the function to initialize the database with sample data
+        init_db()
 
     app.register_blueprint(book_bp)
     app.register_blueprint(user_bp)
@@ -70,4 +77,4 @@ def init_db():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)
+    app.run(port=8000,debug=False)
