@@ -54,24 +54,28 @@ function AddBook() {
     e.preventDefault();
     const formData = new FormData();
     
-    Object.keys(book).forEach(key => {
-      formData.append(key, book[key]);
-    });
+    // Append form fields correctly
+    formData.append('title', book.title);
+    formData.append('author', book.author);
+    formData.append('isbn', book.isbn);
+    formData.append('text_viewer', book.text_viewer);
     
+    // Append image if it exists
     if (image) {
       formData.append('image', image);
     }
-
+  
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8000/books', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
+          // Remove Content-Type header - let the browser set it automatically for FormData
         },
         body: formData
       });
-
+  
       if (response.ok) {
         setBook({
           title: '',

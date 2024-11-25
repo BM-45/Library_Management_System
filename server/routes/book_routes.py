@@ -1,5 +1,5 @@
 # routes/book_routes.py
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app, send_from_directory
 from models.book import Book
 from models.user import User
 from models import db
@@ -25,7 +25,14 @@ def admin_required(func):
 @book_bp.route('/books', methods=['GET'])
 def get_books():
     books = Book.query.all()
-    return jsonify([book.to_dict() for book in books])
+    books_data = []
+    for book in books:
+        book_dict = book.to_dict()
+        if book_dict['image_url']:
+            # Convert relative path to full URL
+            book_dict['image_url'] = f"http://localhost:8000{book_dict['image_url']}"
+        books_data.append(book_dict)
+    return jsonify(books_data)
 
 
 
@@ -95,6 +102,10 @@ def delete_book(book_id):
     db.session.commit()
     return jsonify({'message': 'Book deleted successfully'})
 
+@book_bp.route('/images/<path:filename>')
+def serve_image(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+
 @book_bp.route('/search', methods=['GET'])
 def search_books():
     query = request.args.get('query', '')
@@ -111,4 +122,12 @@ def search_books():
         )
     ).all()
 
-    return jsonify([book.to_dict() for book in results])
+    books_data = []
+    for book in results:
+        book_dict = book.to_dict()
+        if book_dict['image_url']:
+            # Convert relative path to full URL
+            book_dict['image_url'] = f"http://localhost:8000{book_dict['image_url']}"
+        books_data.append(book_dict)
+
+    return jsonify(books_data)

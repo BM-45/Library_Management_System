@@ -33,4 +33,3 @@ class User(db.Model):
             'user_type': self.user_type,
             'is_active': self.is_active
         }
-    

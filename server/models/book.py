@@ -8,9 +8,11 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     author = db.Column(db.String(255), nullable=False)
-    isbn = db.Column(db.String(13), unique=True, nullable=False)
+    isbn = db.Column(db.String(30), unique=True, nullable=False)
     image_url = db.Column(db.String(255))
     text_viewer = db.Column(db.Text)
+    available_copies = db.Column(db.Integer, default=1)
+    checkouts = db.relationship('Checkout', backref='book', lazy=True)
 
     def __repr__(self):
         return f'<Book {self.title}>'
@@ -22,5 +24,6 @@ class Book(db.Model):
             'author': self.author,
             'isbn': self.isbn,
             'image_url': self.image_url,
-            'text_viewer': self.text_viewer
+            'text_viewer': self.text_viewer,
+            'available_copies': self.available_copies
         }
