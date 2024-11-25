@@ -45,22 +45,36 @@ def init_db():
                 title="To Kill a Mockingbird",
                 author="Harper Lee",
                 isbn="9780446310789",
-                image_url="https://example.com/to_kill_a_mockingbird.jpg",
+                image_url="/images/km.jpg",
                 text_viewer="Sample text for To Kill a Mockingbird"
             ),
             Book(
                 title="1984",
                 author="George Orwell",
                 isbn="9780451524935",
-                image_url="https://example.com/1984.jpg",
+                image_url="/images/1984.jpg",
                 text_viewer="Sample text for 1984"
             ),
             Book(
                 title="Pride and Prejudice",
                 author="Jane Austen",
                 isbn="9780141439518",
-                image_url="https://example.com/pride_and_prejudice.jpg",
+                image_url="/images/pp.jpg",
                 text_viewer="Sample text for Pride and Prejudice"
+            ),
+            Book(
+                title="Deep Learning",
+                author="Ian Goodfellow, Yoshua Bengio, Aaron Courville",
+                isbn="978-0262035613",
+                image_url="/images/dl.jpg",
+                text_viewer="Sample text for Pride and Prejudice"
+            ),
+            Book(
+                title="Pattern Recongnistion and Machine learning",
+                author="Christopher M. Bishop",
+                isbn="978-0387310732",
+                image_url="/images/Ml.jpg",
+                text_viewer="Basics of pattern recognition and machine learning."
             )
         ]
 

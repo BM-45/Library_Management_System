@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Container,
-  Typography,
-  TextField,
-  Button,
-  Paper,
-  Box,
-  Divider,
-  IconButton,
-  Stack
-} from '@mui/material';
+import { Container, Typography, TextField, Button, Paper, Box, Divider, IconButton, Stack } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BookIcon from '@mui/icons-material/Book';
@@ -54,28 +44,24 @@ function AddBook() {
     e.preventDefault();
     const formData = new FormData();
     
-    // Append form fields correctly
-    formData.append('title', book.title);
-    formData.append('author', book.author);
-    formData.append('isbn', book.isbn);
-    formData.append('text_viewer', book.text_viewer);
+    Object.keys(book).forEach(key => {
+      formData.append(key, book[key]);
+    });
     
-    // Append image if it exists
     if (image) {
       formData.append('image', image);
     }
-  
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8000/books', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
-          // Remove Content-Type header - let the browser set it automatically for FormData
         },
         body: formData
       });
-  
+
       if (response.ok) {
         setBook({
           title: '',
