@@ -13,6 +13,7 @@ function LoginPage() {
     try {
       const response = await axios.post('http://localhost:8000/login', { username, password });
       localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem('user_id', response.data.user_id);
       navigate('/'); // Redirect to home page after successful login
     } catch (err) {
       setError('Invalid username or password');
