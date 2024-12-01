@@ -8,3 +8,4 @@ pymysql
 python-dotenv
 flask-jwt-extended
 werkzeug
+cryptography

@@ -43,11 +43,11 @@ function AddBook() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    
+
     Object.keys(book).forEach(key => {
       formData.append(key, book[key]);
     });
-    
+
     if (image) {
       formData.append('image', image);
     }
@@ -83,13 +83,20 @@ function AddBook() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Paper 
-        elevation={3} 
-        sx={{ 
+    <Container maxWidth="md" sx={{
+      py: 4, display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh'
+    }}>
+      <Paper
+        elevation={3}
+        sx={{
           p: 4,
           backgroundColor: '#ffffff',
-          borderRadius: 2
+          borderRadius: 2,
+          width: 400,
+          height: 700
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
@@ -102,7 +109,7 @@ function AddBook() {
         <Divider sx={{ mb: 4 }} />
 
         <Box component="form" onSubmit={handleSubmit}>
-          <Stack spacing={3}>
+          <Stack spacing={4}>
             <Box sx={{ display: 'flex', gap: 2 }}>
               <TextField
                 fullWidth
@@ -110,20 +117,22 @@ function AddBook() {
                 name="title"
                 value={book.title}
                 onChange={handleInputChange}
+                rows={2}
                 required
                 variant="outlined"
                 sx={{ flex: 2 }}
               />
-              
+
               <TextField
                 fullWidth
                 label="Author"
                 name="author"
                 value={book.author}
                 onChange={handleInputChange}
+                rows={2}
                 required
                 variant="outlined"
-                sx={{ flex: 1 }}
+                sx={{ flex: 2 }}
               />
             </Box>
 
@@ -136,7 +145,7 @@ function AddBook() {
               required
               variant="outlined"
             />
-            
+
             <TextField
               fullWidth
               label="Description"
@@ -148,7 +157,7 @@ function AddBook() {
               variant="outlined"
             />
 
-            <Box sx={{ 
+            <Box sx={{
               border: '2px dashed #ccc',
               borderRadius: 2,
               p: 3,
@@ -157,14 +166,14 @@ function AddBook() {
             }}>
               {previewUrl ? (
                 <Box sx={{ position: 'relative', display: 'inline-block' }}>
-                  <img 
-                    src={previewUrl} 
-                    alt="Preview" 
-                    style={{ 
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    style={{
                       maxWidth: '200px',
                       maxHeight: '200px',
                       objectFit: 'contain'
-                    }} 
+                    }}
                   />
                   <IconButton
                     onClick={handleRemoveImage}
@@ -184,7 +193,7 @@ function AddBook() {
                   component="label"
                   variant="contained"
                   startIcon={<CloudUploadIcon />}
-                  sx={{ 
+                  sx={{
                     py: 2,
                     px: 4,
                     backgroundColor: 'white',
@@ -208,12 +217,12 @@ function AddBook() {
                 {error}
               </Typography>
             )}
-            
+
             <Button
               type="submit"
               variant="contained"
               size="large"
-              sx={{ 
+              sx={{
                 mt: 4,
                 py: 1.5,
                 fontSize: '1.1rem',

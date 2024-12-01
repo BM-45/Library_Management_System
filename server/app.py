@@ -1,12 +1,16 @@
 # app.py
+from datetime import timedelta
+from datetime import datetime
 from flask import Flask
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from config import Config
 from models.book import db
 from models.user import User
+from models.checkout import Checkout
 from routes.book_routes import book_bp
 from routes.user_routes import user_bp
+from routes.metrics import admin_bp
 from sqlalchemy_utils import create_database, database_exists
 import os
 from routes.checkout_routes import checkout_bp
@@ -31,6 +35,7 @@ def create_app():
     app.register_blueprint(book_bp)
     app.register_blueprint(user_bp)
     app.register_blueprint(checkout_bp)
+    app.register_blueprint(admin_bp)
 
     return app
 
@@ -78,15 +83,19 @@ def init_db():
             )
         ]
 
+        
+
         db.session.add_all(sample_books)
         db.session.commit()
         print("Sample books added to the database.")
     else:
         print("Database already contains books. Skipping initialization.")
 
+        
+
     # Add initial admin user if not exists
     if not User.query.filter_by(username='admin').first():
-        admin = User(username='admin', email='admin@example.com', password='adminpassword', user_type='admin')
+        admin = User(username='admin', email='admin@example.com', password_hash='adminpassword', user_type='admin')
         db.session.add(admin)
         db.session.commit()
         print("Admin user created.")

@@ -11,6 +11,7 @@ import NavBar from './components/Layout/NavBar';
 import Footer from './components/Layout/Footer';
 import UserCheckouts from './components/UserCheckouts';
 import ProfilePage from './pages/ProfilePage';
+import Metrics from './pages/Metrics';
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -34,6 +35,7 @@ function App() {
         <Route path="/addbook" element={<AddBook />} />
         <Route path="/checkout" element={<UserCheckouts />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/metrics" element={<Metrics />} />
         {/*<Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/profile" element={<ProfilePage />} />
