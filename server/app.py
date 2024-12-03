@@ -14,6 +14,7 @@ from routes.metrics import admin_bp
 from routes.summary_route import summary_bp
 from routes.search_route import search_bp
 from routes.recommendation_route import recommend_bp
+from routes.checkin_route import checkin_bp
 from sqlalchemy_utils import create_database, database_exists
 import os
 from routes.checkout_routes import checkout_bp
@@ -42,6 +43,7 @@ def create_app():
     app.register_blueprint(recommend_bp)
     app.register_blueprint(summary_bp)
     app.register_blueprint(search_bp)
+    app.register_blueprint(checkin_bp)
 
     return app
 

@@ -13,6 +13,7 @@ import UserCheckouts from './components/UserCheckouts';
 import ProfilePage from './pages/ProfilePage';
 import Metrics from './pages/Metrics';
 import OverdueFeePage from './pages/OverdueFeePage';
+import CheckInPage from './components/CheckInPage';
 
 
 function ProtectedRoute({ children }) {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/metrics" element={<Metrics />} />
         <Route path="/overDue" element={<OverdueFeePage />} />
+        <Route path="/checkin" element={<CheckInPage />} />
         
         {/*<Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminDashboard />} />

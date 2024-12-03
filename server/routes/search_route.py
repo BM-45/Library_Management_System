@@ -21,6 +21,7 @@ def nlp_search():
         
         # Process the query
         tokens = word_tokenize(query)
+        print(tokens)
         stop_words = set(stopwords.words('english'))
         lemmatizer = WordNetLemmatizer()
         
@@ -31,31 +32,47 @@ def nlp_search():
         for token in tokens:
             if token not in stop_words:
                 lemma = lemmatizer.lemmatize(token)
+                print(lemma)
                 if lemma in ['fiction', 'novel', 'story']:
                     categories.append('Fiction')
                 elif lemma in ['science', 'scientific', 'research']:
-                    categories.append('Non-Fiction')
+                    categories.append('Education')
                 else:
                     keywords.append(lemma)
         
         # Query the database
+        # Initialize the base query
         query = Book.query
-        
+        query2 = Book.query
+
+        # Filter by categories if specified
         if categories:
             query = query.filter(Book.category.in_(categories))
-        
+
         # Add keyword filtering if needed
-        for keyword in keywords:
-            query = query.filter(
-                (Book.title.ilike(f'%{keyword}%')) |
-                (Book.title.ilike(f'%{keyword}%')) |
-                (Book.text_viewer.ilike(f'%{keyword}%'))
-            )
+        if keywords:
+            keyword_filters = []
+            for keyword in keywords:
+                keyword_filters.append(
+                    (Book.title.ilike(f'%{keyword}%')) |
+                    (Book.author.ilike(f'%{keyword}%')) |
+                    (Book.text_viewer.ilike(f'%{keyword}%'))
+                )
+            if keyword_filters:
+                query2 = query2.filter(*keyword_filters)
         
         books = query.limit(10).all()
+        books1 = query2.limit(10).all()
 
         books_data = []
         for book in books:
+            book_dict = book.to_dict()
+            if book_dict['image_url']:
+                # Convert relative path to full URL
+                book_dict['image_url'] = f"http://localhost:8000{book_dict['image_url']}"
+            books_data.append(book_dict)
+
+        for book in books1:
             book_dict = book.to_dict()
             if book_dict['image_url']:
                 # Convert relative path to full URL

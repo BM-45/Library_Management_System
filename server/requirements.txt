@@ -17,3 +17,8 @@ transformers
 torch
 sentencepiece
 nltk
+opencv-python 
+matplotlib 
+scikit-image
+pytesseract
+pyzbar
