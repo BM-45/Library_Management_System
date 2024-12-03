@@ -99,14 +99,13 @@ def init_db():
         db.session.add_all(sample_books)
         db.session.commit()
         print("Sample books added to the database.")
-    else:
-        print("Database already contains books. Skipping initialization.")
 
-        """ # Sample Users
+        # Sample Users
         users = [
             User(username="Alice Johnson", email="alice@example.com", password="1234", user_type='member'),
             User(username="Bob Smith", email="bob@example.com", password="1234", user_type='member'),
-            User(username="Charlie Brown", email="charlie@example.com", password="1234", user_type='member')
+            User(username="Charlie Brown", email="charlie@example.com", password="1234", user_type='member'),
+            User(username='admin', email='admin@example.com', password='adminpassword', user_type='admin')
         ]
 
         # Commit users and books first
@@ -122,16 +121,7 @@ def init_db():
 
         # Add checkouts after users and books are committed
         db.session.add_all(checkouts)
-        db.session.commit() """
-
-        
-
-    # Add initial admin user if not exists
-    if not User.query.filter_by(username='admin').first():
-        admin = User(username='admin', email='admin@example.com', password='adminpassword', user_type='admin')
-        db.session.add(admin)
         db.session.commit()
-        print("Admin user created.")
 
 if __name__ == '__main__':
     app = create_app()
