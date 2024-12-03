@@ -12,6 +12,8 @@ import Footer from './components/Layout/Footer';
 import UserCheckouts from './components/UserCheckouts';
 import ProfilePage from './pages/ProfilePage';
 import Metrics from './pages/Metrics';
+import OverdueFeePage from './pages/OverdueFeePage';
+import NLPSearchResults from './pages/NLPSearchResults';
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -36,6 +38,8 @@ function App() {
         <Route path="/checkout" element={<UserCheckouts />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/metrics" element={<Metrics />} />
+        <Route path="/overDue" element={<OverdueFeePage />} />
+        <Route path="/results" element={<NLPSearchResults />} />
         {/*<Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/profile" element={<ProfilePage />} />

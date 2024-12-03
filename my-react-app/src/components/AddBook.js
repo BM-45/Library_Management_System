@@ -10,6 +10,7 @@ function AddBook() {
     author: '',
     isbn: '',
     text_viewer: '',
+    category: ''
   });
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -67,6 +68,7 @@ function AddBook() {
           title: '',
           author: '',
           isbn: '',
+          category: '',
           text_viewer: ''
         });
         setImage(null);
@@ -96,7 +98,7 @@ function AddBook() {
           backgroundColor: '#ffffff',
           borderRadius: 2,
           width: 400,
-          height: 700
+          height: 900
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
@@ -155,6 +157,17 @@ function AddBook() {
               multiline
               rows={6}
               variant="outlined"
+            />
+
+            <TextField
+              fullWidth
+              label="Category"
+              name="category"
+              value={book.category}
+              onChange={handleInputChange}
+              required
+              variant="outlined"
+              sx={{ mb: 2 }}
             />
 
             <Box sx={{

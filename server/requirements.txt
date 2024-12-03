@@ -3,9 +3,17 @@ flask
 flask-cors
 flask-mysqldb
 Flask-SQLAlchemy
+SQLAlchemy
 sqlalchemy-utils
 pymysql
 python-dotenv
 flask-jwt-extended
 werkzeug
 cryptography
+scikit-surprise
+numpy<2
+pandas
+transformers
+torch
+sentencepiece
+nltk

@@ -79,6 +79,7 @@ function Header() {
           </Box>
 
           {/* Navigation Links */}
+          {/*
           <Stack 
             direction="row" 
             spacing={3} 
@@ -97,6 +98,7 @@ function Header() {
               Contact
             </Button>
           </Stack>
+          */}
 
           {/* Auth Buttons or User Menu */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>

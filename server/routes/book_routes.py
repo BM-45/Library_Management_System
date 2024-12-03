@@ -60,6 +60,7 @@ def add_book():
         title = request.form.get('title')
         author = request.form.get('author')
         isbn = request.form.get('isbn')
+        category = request.form.get('category')
         text_viewer = request.form.get('text_viewer')
         
         # Create new book object
@@ -67,6 +68,7 @@ def add_book():
             title=title,
             author=author,
             isbn=isbn,
+            category=category,
             image_url=f"/images/{filename}",  # Store the relative path
             text_viewer=text_viewer
         )

@@ -149,7 +149,7 @@ function SearchResults() {
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Paper elevation={3} sx={{ p: 3, mb: 4 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-          <BookIcon sx={{ fontSize: 40, mr: 2, color: 'primary.main' }} />
+          <BookIcon sx={{ fontSize: 24, mr: 2, color: 'primary.main' }} />
           <Typography variant="h4" component="h1">
             Search Results for "{query}" in {category}
           </Typography>
@@ -159,7 +159,7 @@ function SearchResults() {
 
       <Grid container spacing={3}>
         {results.map(book => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={book.id}>
+          <Grid item xs={12} sm={6} md={3} lg={2} key={book.id}>
             <Card
               sx={{
                 height: '100%',
@@ -172,18 +172,19 @@ function SearchResults() {
                 }
               }}
             >
-              <Box sx={{ position: 'relative', pt: '140%' }}>
+              <Box sx={{ position: 'relative', pt: '100%' }}>
                 <CardMedia
                   component="img"
                   sx={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
-                    height: '100%',
+                    height: '80%',
+                    width: '80%',
                     objectFit: 'contain',
                     p: 2
                   }}
-                  image={book.image_url || 'https://via.placeholder.com/300x400'}
+                  image={book.image_url || 'https://via.placeholder.com/150x200'}
                   alt={book.title}
                 />
               </Box>
@@ -194,7 +195,7 @@ function SearchResults() {
                   variant="h6"
                   sx={{
                     fontWeight: 'bold',
-                    fontSize: '1.1rem',
+                    fontSize: '1rem',
                     mb: 1,
                     height: '2.4em',
                     overflow: 'hidden',

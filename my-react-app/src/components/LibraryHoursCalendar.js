@@ -29,15 +29,28 @@ function LibraryHoursCalendar() {
     setOpenDialog(true);
   };
 
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
-
   return (
-    <Box sx={{ mt: 4 }}>
-      <Typography variant="h6" gutterBottom>
-        Library Hours
-      </Typography>
+    <Box sx={{ 
+      
+      '& .MuiDayPicker-monthContainer': {
+        minHeight: 'auto',
+      },
+      '& .MuiPickersDay-root': {
+        width: '32px',
+        height: '32px',
+        fontSize: '0.75rem',
+        color: '#000',  // Makes the day numbers black
+      },
+      '& .MuiTypography-root': {
+        color: '#000',  // Makes all typography elements black
+      },
+      '& .MuiDayPicker-weekDayLabel': {
+        color: '#000',  // Makes weekday labels black
+      },
+      '& .MuiPickersDay-today': {
+        color: '#000',  // Makes today's date black
+      }
+    }}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker
           displayStaticWrapperAs="desktop"
@@ -47,17 +60,27 @@ function LibraryHoursCalendar() {
           renderInput={(params) => <Box {...params} />}
           disablePast
           showDaysOutsideCurrentMonth
-          sx={{ width: '100%' }}
         />
       </LocalizationProvider>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
+      <Dialog 
+        open={openDialog} 
+        onClose={() => setOpenDialog(false)}
+        PaperProps={{
+          sx: { width: '300px' }
+        }}
+      >
         <DialogTitle>Library Timings</DialogTitle>
         <DialogContent>
           <Typography>
             The library is open on {selectedDate.toLocaleDateString()} from {libraryHours}.
           </Typography>
-          <Button onClick={handleCloseDialog} sx={{ mt: 2 }} variant="contained">
+          <Button 
+            onClick={() => setOpenDialog(false)} 
+            sx={{ mt: 2 }} 
+            variant="contained"
+            fullWidth
+          >
             Close
           </Button>
         </DialogContent>

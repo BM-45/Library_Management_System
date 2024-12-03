@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { 
+  Container, 
+  Typography, 
+  TextField, 
+  Button, 
+  Box, 
+  Paper,
+  Avatar
+} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 function LoginPage() {
   const [username, setUsername] = useState('');
@@ -14,40 +24,62 @@ function LoginPage() {
       const response = await axios.post('http://localhost:8000/login', { username, password });
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('user_id', response.data.user_id);
-      navigate('/'); // Redirect to home page after successful login
+      navigate('/');
     } catch (err) {
       setError('Invalid username or password');
     }
   };
 
   return (
-    <div className="login-page">
-      <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
+    <Container component="main" maxWidth="xs">
+      <Paper elevation={3} sx={{ mt: 8, p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Login
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required
           />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
             type="password"
             id="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+          {error && (
+            <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+              {error}
+            </Typography>
+          )}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   );
 }
 
