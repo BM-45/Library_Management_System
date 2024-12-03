@@ -15,7 +15,7 @@ def nlp_search():
         query = request.json.get('query', '').lower()
         
         # Initialize NLTK components
-        nltk.download('punkt')
+        nltk.download('punkt_tab')
         nltk.download('stopwords')
         nltk.download('wordnet')
         
