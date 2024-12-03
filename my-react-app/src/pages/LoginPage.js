@@ -18,13 +18,21 @@ function LoginPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/login', { username, password });
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('user_id', response.data.user_id);
-      navigate('/');
+      
+      // Check user type and navigate accordingly
+      console.log(response.data.user_type)
+      if (response.data.user_type === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       setError('Invalid username or password');
     }

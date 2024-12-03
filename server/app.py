@@ -93,6 +93,14 @@ def init_db():
             image_url="/images/Ml.jpg",
             text_viewer="This is the first textbook on pattern recognition to present the Bayesian viewpoint. The book presents approximate inference algorithms that permit fast approximate answers in situations where exact answers are not feasible. It uses graphical models to describe probability distributions when no other books apply graphical models to machine learning. No previous knowledge of pattern recognition or machine learning concepts is assumed. Familiarity with multivariate calculus and basic linear algebra is required, and some experience in the use of probabilities would be helpful though not essential as the book includes a self-contained introduction to basic probability theory.",
             category="Education"
+        ),
+        Book(
+            title="My Own Book",
+            author="Bhanu",
+            isbn="210-013540901",
+            image_url="/images/Ml.jpg",
+            text_viewer="This is the first textbook on pattern recognition to present the Bayesian viewpoint. The book presents approximate inference algorithms that permit fast approximate answers in situations where exact answers are not feasible. It uses graphical models to describe probability distributions when no other books apply graphical models to machine learning. No previous knowledge of pattern recognition or machine learning concepts is assumed. Familiarity with multivariate calculus and basic linear algebra is required, and some experience in the use of probabilities would be helpful though not essential as the book includes a self-contained introduction to basic probability theory.",
+            category="Education"
         )
     ]
 
@@ -118,7 +126,8 @@ def init_db():
         checkouts = [
             Checkout(user_id=1, book_id=1, checkout_date=datetime.now() - timedelta(days=15), due_date=datetime.now() - timedelta(days=5), status='checked_out'),
             Checkout(user_id=2, book_id=2, checkout_date=datetime.now() - timedelta(days=10), due_date=datetime.now() + timedelta(days=5), status='checked_out'),
-            Checkout(user_id=3, book_id=3, checkout_date=datetime.now() - timedelta(days=20), due_date=datetime.now() - timedelta(days=10), status='checked_out')
+            Checkout(user_id=3, book_id=3, checkout_date=datetime.now() - timedelta(days=20), due_date=datetime.now() - timedelta(days=10), status='checked_out'),
+            Checkout(user_id=1, book_id=10, checkout_date=datetime.now() - timedelta(days=20), due_date=datetime.now() - timedelta(days=10), status='checked_out')
         ]
 
         # Add checkouts after users and books are committed
