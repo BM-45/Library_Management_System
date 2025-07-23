@@ -12,6 +12,7 @@ class Book(db.Model):
     image_url = db.Column(db.String(255))
     text_viewer = db.Column(db.Text)
     available_copies = db.Column(db.Integer, default=1)
+    category = db.Column(db.String(100), nullable=True)
     checkouts = db.relationship('Checkout', backref='book', lazy=True)
 
     def __repr__(self):

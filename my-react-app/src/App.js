@@ -7,6 +7,14 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AddBook from './components/AddBook';
+import NavBar from './components/Layout/NavBar';
+import Footer from './components/Layout/Footer';
+import UserCheckouts from './components/UserCheckouts';
+import ProfilePage from './pages/ProfilePage';
+import Metrics from './pages/Metrics';
+import OverdueFeePage from './pages/OverdueFeePage';
+import CheckInPage from './components/CheckInPage';
+
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -19,7 +27,7 @@ function App() {
   return (
     <Router>
     <div>
-
+      <NavBar />
       
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -28,11 +36,20 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
         <Route path="/addbook" element={<AddBook />} />
+        <Route path="/checkout" element={<UserCheckouts />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/metrics" element={<Metrics />} />
+        <Route path="/overDue" element={<OverdueFeePage />} />
+        <Route path="/checkin" element={<CheckInPage />} />
+        
         {/*<Route path="/register" element={<RegisterPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/profile" element={<ProfilePage />} />
          Add other routes as needed */}
       </Routes>
+
+
+      <Footer/>
     </div>
     </Router>
   );
